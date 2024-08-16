@@ -1,8 +1,8 @@
-from django.contrib.auth.models import User, Group
 from django.contrib import admin
 from .models import Customer
 from django.utils.html import mark_safe
 from django.contrib.auth.models import User, Group
+
 
 # admin.site.register(Customer)
 admin.site.unregister(Group)
@@ -19,3 +19,4 @@ class CustomerAdmin(admin.ModelAdmin):
         return 'No Image'
 
     image_tag.short_description = 'Image'
+

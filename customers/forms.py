@@ -14,7 +14,7 @@ class CustomerForm(forms.ModelForm):
 # LOGIN REGISTER qismi
 
 class LoginForm(forms.Form):
-    username = forms.CharField(required=True)
+    email = forms.EmailField(required=True)
     password = forms.CharField(required=True)
     #
     # def clean_username(self):
@@ -26,16 +26,18 @@ class LoginForm(forms.Form):
 
 class RegisterForm(forms.ModelForm):
     confirm_password = forms.CharField(max_length=255)
+    username = forms.CharField(max_length=100, required=False)
+
 
     class Meta:
         model = User
         fields = ('username', 'email', 'password')
 
     def clean_username(self):
-        username = self.data.get('username')
-        if User.objects.filter(username=username).exists():
-            raise forms.ValidationError(f'This {username} is already exists')
-        return username
+        email = self.data.get('email')
+        if User.objects.filter(username=email).exists():
+            raise forms.ValidationError(f'This {email} is already exists')
+        return email
 
     def clean_password(self):
         password = self.data.get('password')
