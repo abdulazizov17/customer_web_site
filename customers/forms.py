@@ -7,11 +7,11 @@ class CustomerForm(forms.ModelForm):
         model = Customer
         fields = '__all__'
 
-
-
-
-
-# LOGIN REGISTER qismi
+#
+#
+#
+#
+# # LOGIN REGISTER qismi
 
 class LoginForm(forms.Form):
     email = forms.EmailField(required=True)

@@ -623,7 +623,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // show cursor
 	      self.showCursor = self.isInput ? false : self.options.showCursor;
 	
-	      // custom cursor
+	      // users cursor
 	      self.cursorChar = self.options.cursorChar;
 	
 	      // Is the cursor blinking

@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from customers.forms import LoginForm,RegisterForm
+from customers.templates.customers import registrat
 
 def login_page(request):
     if request.method == 'POST':

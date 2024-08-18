@@ -2863,7 +2863,7 @@
       option('domModification')
     ]);
     var toInfo = function (spec) {
-      return asRaw('custom.definition', schema$z, spec);
+      return asRaw('users.definition', schema$z, spec);
     };
     var toDefinition = function (detail) {
       return __assign(__assign({}, detail.dom), {
@@ -11879,7 +11879,7 @@
 
     var global$9 = tinymce.util.Tools.resolve('tinymce.util.LocalStorage');
 
-    var storageName = 'tinymce-custom-colors';
+    var storageName = 'tinymce-users-colors';
     function ColorCache (max) {
       if (max === void 0) {
         max = 10;
@@ -16869,10 +16869,10 @@
       return {
         dom: {
           tag: 'div',
-          classes: ['tox-custom-editor']
+          classes: ['tox-users-editor']
         },
         behaviours: derive$1([
-          config('custom-editor-events', [runOnAttached(function (component) {
+          config('users-editor-events', [runOnAttached(function (component) {
               memReplaced.getOpt(component).each(function (ta) {
                 (isOldCustomEditor(spec) ? spec.init(ta.element.dom) : global$7.load(spec.scriptId, spec.scriptUrl).then(function (init) {
                   return init(ta.element.dom, spec.settings);
@@ -22145,7 +22145,7 @@
           };
         } else if (isInlineFormat(fmt) || isBlockFormat(fmt) || isSelectorFormat(fmt)) {
           var formatName = isString(fmt.name) ? fmt.name : fmt.title.toLowerCase();
-          var formatNameWithPrefix = 'custom-' + formatName;
+          var formatNameWithPrefix = 'users-' + formatName;
           return {
             customFormats: acc.customFormats.concat([{
                 name: formatNameWithPrefix,
@@ -22208,7 +22208,7 @@
       };
       var enrichCustom = function (item) {
         var formatName = isString(item.name) ? item.name : generate$6(item.title);
-        var formatNameWithPrefix = 'custom-' + formatName;
+        var formatNameWithPrefix = 'users-' + formatName;
         var customSpec = {
           type: 'formatter',
           format: formatNameWithPrefix,

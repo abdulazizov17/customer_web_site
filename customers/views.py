@@ -2,14 +2,16 @@ from django.shortcuts import render, get_object_or_404, redirect
 from customers.models import Customer
 from django.db.models import Q
 from customers.forms import CustomerForm
-from typing import Optional
-
+from django.core.paginator import Paginator
 
 
 def customer_list(request):
+    customers = Customer.objects.all()
+    paginator = Paginator(customers, 2)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     search = request.GET.get('q')
     order = request.GET.get('order', 'recent')
-
     if search:
         customer = Customer.objects.filter(Q(full_name__icontains=search)) | Q(email__icontains=search)
     if order == 'recent':
@@ -18,6 +20,7 @@ def customer_list(request):
         customer = Customer.objects.all()
     context = {
         'customers': customer,
+        'customer_page': page_obj,
     }
     return render(request,'customers/home.html', context)
 

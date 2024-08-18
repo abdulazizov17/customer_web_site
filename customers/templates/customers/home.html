@@ -1970,7 +1970,8 @@
                 <ul class="navbar-nav align-items-center d-none d-lg-block">
                     <li class="nav-item">
                         <div class="search-box" data-list='{"valueNames":["title"]}'>
-                            <form method="post" class="position-relative" data-bs-toggle="search" data-bs-display="static" name="search">
+                            <form method="post" class="position-relative" data-bs-toggle="search"
+                                  data-bs-display="static" name="search">
                                 <input class="form-control search-input fuzzy-search" type="search"
                                        placeholder="Search..." aria-label="Search"/>
                                 <span class="fas fa-search search-box-icon"></span>
@@ -2259,6 +2260,7 @@
                         </div>
 
                     </li>
+
                     <li class="nav-item dropdown"><a class="nav-link pe-0" id="navbarDropdownUser" href="#"
                                                      role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                                                      aria-expanded="false">
@@ -2272,10 +2274,13 @@
                             <div class="bg-white dark__bg-1000 rounded-2 py-2">
                                 {% if user.is_authenticated %}
                                     <form method="post" action="{% url 'logout_page' %}">
+                                                                                            <h3>{{ user.username }}</h3>
+
+
                                         {% csrf_token %}
                                         <div>
                                             <button type="submit" class="btn btn-outline-danger">Log out</button>
-                                            <h3>{{ user.username }}</h3>
+
                                         </div>
                                     </form>
 
@@ -2342,7 +2347,8 @@
                                                data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}'/>
                                     </div>
                                 </th>
-                                <th class="sort pe-1 align-middle white-space-nowrap" data-sort="Last Name">Full Name</th>
+                                <th class="sort pe-1 align-middle white-space-nowrap" data-sort="Last Name">Full Name
+                                </th>
                                 <th class="sort pe-1 align-middle white-space-nowrap" data-sort="email">Email</th>
                                 <th class="sort pe-1 align-middle white-space-nowrap" data-sort="phone">Phone</th>
                                 <th class="sort pe-1 align-middle white-space-nowrap ps-5" data-sort="address"
@@ -2354,59 +2360,72 @@
                             </thead>
                             {% for customer in customers %}
 
-                            <tbody class="list" id="table-customers-body">
-                            <tr class="btn-reveal-trigger">
-                                <td class="align-middle py-2" style="width: 28px;">
-                                    <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                        <input class="form-check-input" type="checkbox" id="customer-0"
-                                               data-bulk-select-row="data-bulk-select-row"/>
-                                    </div>
-                                </td>
-                                <td class="name align-middle white-space-nowrap py-2"><a
-                                        href="{% url 'customer_detail' customer.id %}">
-                                    <div class="d-flex d-flex align-items-center">
-                                        <div class="avatar avatar-xl me-2">
-                                            <img class="rounded-circle" src="{{ customer.image.url }}"/>
+                                <tbody class="list" id="table-customers-body">
+                                <tr class="btn-reveal-trigger">
+                                    <td class="align-middle py-2" style="width: 28px;">
+                                        <div class="form-check fs-0 mb-0 d-flex align-items-center">
+                                            <input class="form-check-input" type="checkbox" id="customer-0"
+                                                   data-bulk-select-row="data-bulk-select-row"/>
                                         </div>
-{#                                        <div class="flex-1">#}
-{#                                            <h5 class="mb-0 fs--1">{{ customer.full_name }}</h5>#}
-{#                                        </div>#}
-                                        <div class="flex-1">
-                                            <h5 class="mb-0 fs--1">{{ customer.full_name }}</h5>
+                                    </td>
+                                    <td class="name align-middle white-space-nowrap py-2"><a
+                                            href="{% url 'customer_detail' customer.id %}">
+                                        <div class="d-flex d-flex align-items-center">
+                                            <div class="avatar avatar-xl me-2">
+                                                <img class="rounded-circle" src="{{ customer.image.url }}"/>
+                                            </div>
+                                            {#                                        <div class="flex-1">#}
+                                            {#                                            <h5 class="mb-0 fs--1">{{ customer.full_name }}</h5>#}
+                                            {#                                        </div>#}
+                                            <div class="flex-1">
+                                                <h5 class="mb-0 fs--1">{{ customer.full_name }}</h5>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a></td>
-                                <td class="email align-middle py-2"><a
-                                        href="{{ customer.email }}">{{ customer.email}}</a></td>
-                                <td class="phone align-middle white-space-nowrap py-2"><a href="{{ customer.phone }}">{{ customer.phone }}</a></td>
-                                <td class="address align-middle white-space-nowrap ps-5 py-2">{{ customer.address }}
-                                </td>
-                                <td class="joined align-middle py-2">{{ customer.joined }}</td>
-                                <td class="align-middle white-space-nowrap py-2 text-end">
-                                    <div class="dropdown font-sans-serif position-static">
-                                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal"
-                                                type="button" id="customer-dropdown-0" data-bs-toggle="dropdown"
-                                                data-boundary="window" aria-haspopup="true" aria-expanded="false"><span
-                                                class="fas fa-ellipsis-h fs--1"></span></button>
-                                        <div class="dropdown-menu dropdown-menu-end border py-0"
-                                             aria-labelledby="customer-dropdown-0">
-                                            <div class="bg-white py-2"><a class="dropdown-item" href="{% url 'customer_update' customer.id %}">Edit</a><a
-                                                    class="dropdown-item text-danger" href="{% url 'customer_delete' customer.id %}">Delete</a></div>
+                                    </a></td>
+                                    <td class="email align-middle py-2"><a
+                                            href="{{ customer.email }}">{{ customer.email }}</a></td>
+                                    <td class="phone align-middle white-space-nowrap py-2"><a
+                                            href="{{ customer.phone }}">{{ customer.phone }}</a></td>
+                                    <td class="address align-middle white-space-nowrap ps-5 py-2">{{ customer.address }}
+                                    </td>
+                                    <td class="joined align-middle py-2">{{ customer.joined }}</td>
+                                    <td class="align-middle white-space-nowrap py-2 text-end">
+                                        <div class="dropdown font-sans-serif position-static">
+                                            <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal"
+                                                    type="button" id="customer-dropdown-0" data-bs-toggle="dropdown"
+                                                    data-boundary="window" aria-haspopup="true"
+                                                    aria-expanded="false"><span
+                                                    class="fas fa-ellipsis-h fs--1"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end border py-0"
+                                                 aria-labelledby="customer-dropdown-0">
+                                                <div class="bg-white py-2"><a class="dropdown-item"
+                                                                              href="{% url 'customer_update' customer.id %}">Edit</a><a
+                                                        class="dropdown-item text-danger"
+                                                        href="{% url 'customer_delete' customer.id %}">Delete</a></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
+                                    </td>
+                                </tr>
+                                </tbody>
                             {% endfor %}
                         </table>
                     </div>
                 </div>
                 <div class="card-footer d-flex align-items-center justify-content-center">
-                    <button class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous"
-                            data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
-                    <ul class="pagination mb-0"></ul>
-                    <button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next"
-                            data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
+                    <div class="pagination"><span class="step-links">
+                        {% if customer_page.has_previous %}
+                            <a href="?page=1">&laquo; first</a>
+                            <a href="?page={{ customer_page.previous_page_number }}">previous</a>
+                        {% endif %}
+
+                        <span class="current">Page {{ customer_page.number }} of {{ customer_page.paginator.num_pages }}.</span>
+
+                         {% if customer_page.has_next %}
+                            <a href="?page={{ customer_page.next_page_number }}">next</a>
+                            <a href="?page={{ customer_page.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                            </span>
+                    </div>
                 </div>
             </div>
             <footer class="footer">

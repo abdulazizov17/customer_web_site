@@ -11380,7 +11380,7 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * Base sensor class. Extend from this class to create a new or custom sensor
+ * Base sensor class. Extend from this class to create a new or users sensor
  * @class Sensor
  * @module Sensor
  */
@@ -12218,7 +12218,7 @@ var USE_NATIVE = !!function () {
     // unhandled rejections tracking support, NodeJS Promise without it fails @@species test
     return (isNode || typeof PromiseRejectionEvent == 'function')
       && promise.then(empty) instanceof FakePromise
-      // v8 6.6 (Node 10 and Chrome 66) have a bug with resolving custom thenables
+      // v8 6.6 (Node 10 and Chrome 66) have a bug with resolving users thenables
       // https://bugs.chromium.org/p/chromium/issues/detail?id=830565
       // we can't detect it synchronously, so just check versions
       && v8.indexOf('6.6') !== 0

@@ -13,6 +13,7 @@ from config import jazzmin
 from pathlib import Path
 import os
 from .jazzmin import JAZZMIN_SETTINGS
+# from users.models import User
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -42,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'customers.apps.CustomersConfig',
+    'users.apps.CustomConfig',
+    'product.apps.ProductConfig',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +140,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
 
+AUTH_USER_MODEL = 'users.User'

@@ -796,7 +796,7 @@ interface BaseDialogFooterButtonSpec {
     icon?: string;
 }
 interface DialogFooterNormalButtonSpec extends BaseDialogFooterButtonSpec {
-    type: 'submit' | 'cancel' | 'custom';
+    type: 'submit' | 'cancel' | 'users';
     text: string;
 }
 interface DialogFooterMenuButtonSpec extends BaseDialogFooterButtonSpec {
@@ -880,7 +880,7 @@ declare type UrlDialogCloseHandler = () => void;
 declare type UrlDialogCancelHandler = (api: UrlDialogInstanceApi) => void;
 declare type UrlDialogMessageHandler = (api: UrlDialogInstanceApi, message: UrlDialogMessage) => void;
 interface UrlDialogFooterButtonSpec extends DialogFooterNormalButtonSpec {
-    type: 'cancel' | 'custom';
+    type: 'cancel' | 'users';
 }
 interface UrlDialogSpec {
     title: string;

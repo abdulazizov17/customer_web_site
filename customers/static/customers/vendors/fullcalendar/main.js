@@ -5372,7 +5372,7 @@ var FullCalendar = (function (exports) {
         var superDef = null;
         if (superType) {
             if (superType === viewType) {
-                throw new Error('Can\'t have a custom view type that references itself');
+                throw new Error('Can\'t have a users view type that references itself');
             }
             superDef = ensureViewDef(superType, hash, defaultConfigs, overrideConfigs);
         }
@@ -9319,7 +9319,7 @@ var FullCalendar = (function (exports) {
                 dateEnv: context.dateEnv,
             });
             var classNames = getDayClassNames(hookProps, context.theme).concat(hookProps.isDisabled
-                ? [] // don't use custom classNames if disabled
+                ? [] // don't use users classNames if disabled
                 : this.normalizeClassNames(options.dayCellClassNames, hookProps));
             var dataAttrs = hookProps.isDisabled ? {} : {
                 'data-date': formatDayString(props.date),
@@ -9598,7 +9598,7 @@ var FullCalendar = (function (exports) {
             _this.isRendering = false;
             _this.isRendered = false;
             _this.currentClassNames = [];
-            _this.customContentRenderId = 0; // will affect custom generated classNames?
+            _this.customContentRenderId = 0; // will affect users generated classNames?
             _this.handleAction = function (action) {
                 // actions we know we want to render immediately
                 switch (action.type) {

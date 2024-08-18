@@ -914,7 +914,7 @@ function registerFlag(flag) {
   registeredFlags[flag] = true;
 }
 /**
- * Runs built-in and custom regex syntax tokens in reverse insertion order at the specified
+ * Runs built-in and users regex syntax tokens in reverse insertion order at the specified
  * position, until a match is found.
  *
  * @private
@@ -1060,7 +1060,7 @@ function XRegExp(pattern, flags) {
 
     while (pos < appliedPattern.length) {
       do {
-        // Check for custom tokens at the current position
+        // Check for users tokens at the current position
         result = runTokens(appliedPattern, appliedFlags, pos, scope, context); // If the matched token used the `reparse` option, splice its output into the
         // pattern before running tokens again at the same position
 
@@ -1130,7 +1130,7 @@ XRegExp._dec = dec;
 XRegExp._hex = hex;
 XRegExp._pad4 = pad4;
 /**
- * Extends XRegExp syntax and allows custom flags. This is used internally and can be used to
+ * Extends XRegExp syntax and allows users flags. This is used internally and can be used to
  * create XRegExp addons. If more than one token can match the same string, the last added wins.
  *
  * @memberOf XRegExp
@@ -1147,7 +1147,7 @@ XRegExp._pad4 = pad4;
  *   - `scope` {String} Scope where the token applies: 'default', 'class', or 'all'.
  *   - `flag` {String} Single-character flag that triggers the token. This also registers the
  *     flag, which prevents XRegExp from throwing an 'unknown flag' error when the flag is used.
- *   - `optionalFlags` {String} Any custom flags checked for within the token `handler` that are
+ *   - `optionalFlags` {String} Any users flags checked for within the token `handler` that are
  *     not required to trigger the token. This registers the flags, to prevent XRegExp from
  *     throwing an 'unknown flag' error when any of the flags are used.
  *   - `reparse` {Boolean} Whether the `handler` function's output should not be treated as

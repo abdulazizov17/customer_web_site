@@ -7857,7 +7857,7 @@
       option('domModification')
     ]);
     var toInfo = function (spec) {
-      return asRaw('custom.definition', schema$6, spec);
+      return asRaw('users.definition', schema$6, spec);
     };
     var toDefinition = function (detail) {
       return __assign(__assign({}, detail.dom), {

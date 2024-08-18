@@ -1083,7 +1083,7 @@ var dropzoneInit = function dropzoneInit() {
 
 var formValidationInit = function formValidationInit() {
   // Example starter JavaScript for disabling form submissions if there are invalid fields
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  // Fetch all the forms we want to apply users Bootstrap validation styles to
   var forms = document.querySelectorAll('.needs-validation'); // Loop over them and prevent submission
 
   Array.prototype.slice.call(forms).forEach(function (form) {
