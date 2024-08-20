@@ -13,9 +13,17 @@ from config import jazzmin
 from pathlib import Path
 import os
 from .jazzmin import JAZZMIN_SETTINGS
+import environ
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+env = environ.Env(
+    # DEBUG=(bool, False)
+)
+environ.Env.read_env(os.path.join(BASE_DIR,'.env'))
+
 # from users.models import User
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -45,6 +53,7 @@ INSTALLED_APPS = [
     'customers.apps.CustomersConfig',
     'users.apps.CustomConfig',
     'product.apps.ProductConfig',
+    'django.contrib.postgres',
 ]
 
 MIDDLEWARE = [
@@ -82,13 +91,23 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ecommerce',
+        'PASSWORD': '123',
+        'HOST': 'localhost',
+        'PORT': 5432,
+        'USER': 'ecommerce',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

@@ -2412,20 +2412,19 @@
                     </div>
                 </div>
                 <div class="card-footer d-flex align-items-center justify-content-center">
-                    <div class="pagination"><span class="step-links">
-                        {% if customer_page.has_previous %}
-                            <a href="?page=1">&laquo; first</a>
-                            <a href="?page={{ customer_page.previous_page_number }}">previous</a>
-                        {% endif %}
+                        <span class="step-links">
+                            {% if customer_page.has_previous %}
+                                <a href="?page=1">&laquo; first</a>
+                                <a href="?page={{ customer_page.previous_page_number }}">previous</a>
+                            {% endif %}
 
-                        <span class="current">Page {{ customer_page.number }} of {{ customer_page.paginator.num_pages }}.</span>
+                            <span class="current">Page {{ customer_page.number }} of {{ customer_page.paginator.num_pages }}.</span>
 
-                         {% if customer_page.has_next %}
-                            <a href="?page={{ customer_page.next_page_number }}">next</a>
-                            <a href="?page={{ customer_page.paginator.num_pages }}">last &raquo;</a>
-                        {% endif %}
-                            </span>
-                    </div>
+                             {% if customer_page.has_next %}
+                                <a href="?page={{ customer_page.next_page_number }}">next</a>
+                                <a href="?page={{ customer_page.paginator.num_pages }}">last &raquo;</a>
+                            {% endif %}
+                        </span>
                 </div>
             </div>
             <footer class="footer">
