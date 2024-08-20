@@ -94,15 +94,16 @@ class CustomerCreateView(View):
 
     def get(self, request):
         form = CustomerForm()
+        contex = {
+            'form':form
+        }
+        return render(request, 'customers/add-customer.html', contex)
+
     def post(self, request):
         form = CustomerForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('customer_list')
-        contex = {
-            'form': form
-        }
-        return render(request, 'customers/add-customer.html', contex)
 
 
 # def customer_update(request, customer_id):
