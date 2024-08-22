@@ -52,3 +52,11 @@ class RegisterForm(forms.ModelForm):
 
         return user
 
+
+class SendingEmailForm(forms.Form):
+    subject = forms.CharField(max_length=255)
+    message = forms.CharField(widget=forms.Textarea)
+    from_to = forms.EmailField(required=True)
+    recipient = forms.EmailField(required=True)
+
+
