@@ -9,18 +9,21 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-from config import jazzmin
-from pathlib import Path
 import os
-from .jazzmin import JAZZMIN_SETTINGS
+from pathlib import Path
+
 import environ
+import social_django
+
+from config import jazzmin
+from .jazzmin import JAZZMIN_SETTINGS
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 env = environ.Env(
-    # DEBUG=(bool, False)
+    DEBUG=(bool, False)
 )
-environ.Env.read_env(os.path.join(BASE_DIR,'.env'))
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # from users.models import User
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -33,12 +36,11 @@ environ.Env.read_env(os.path.join(BASE_DIR,'.env'))
 SECRET_KEY = 'django-insecure-_tv_uhcdej%o56v1o8q92g2^etd)0+_h1ttv^g=9oans68#ay@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = [
     '*'
 ]
-
 
 # Application definition
 
@@ -54,6 +56,8 @@ INSTALLED_APPS = [
     'users.apps.CustomConfig',
     'product.apps.ProductConfig',
     'django.contrib.postgres',
+    'social_django',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -86,7 +90,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -127,7 +130,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -139,20 +141,18 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = [ os.path.join(BASE_DIR, 'staticfiles') ]
+STATIC_ROOT = [os.path.join(BASE_DIR, 'staticfiles')]
 
 MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 #
-
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -167,3 +167,13 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'abdulazizovasilbek872@gmail.com'
 EMAIL_HOST_PASSWORD = 'icyr klts basq srid'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.google.GoogleOAuth2',
+]
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =env('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET =env('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+
+LOGIN_REDIRECT_URL = 'ecommerce'
