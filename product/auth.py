@@ -74,8 +74,7 @@ class RegisterPage(FormView):
             'User Succesfully Registered',
             'Test body',
             [user.email],
-            fail_silently=False
-        )
+            fail_silently=False )
         login(self.request, user,backend='django.contrib.auth.backends.ModelBackend')
         return super().form_valid(form)
 
@@ -84,12 +83,12 @@ def logout_page(request):
         logout(request)
         return redirect('customer_list')
 
-class LogoutPage(LogoutView):
-    next_page = reverse_lazy('login')  # Redirects to the login page after logout
-
-    def dispatch(self, request, *args, **kwargs):
-        messages.success(request, 'You have successfully logged out.')
-        return super().dispatch(request, *args, **kwargs)
+# class LogoutPage(LogoutView):
+#     next_page = reverse_lazy('login')  # Redirects to the login page after logout
+#
+#     def dispatch(self, request, *args, **kwargs):
+#         messages.success(request, 'You have successfully logged out.')
+#         return super().dispatch(request, *args, **kwargs)
 
 
 class SendingEmail(View):

@@ -4,6 +4,11 @@ from django.db.models import Q
 from customers.forms import CustomerForm
 from django.core.paginator import Paginator
 from django.views import View
+import csv
+import datetime
+import json
+from django.http import HttpResponse
+
 
 # def customer_list(request):
 #     customers = Customer.objects.all()
@@ -27,20 +32,21 @@ from django.views import View
 class CustomerListView(View):
     def get(self, request):
         customers = Customer.objects.all()
-        paginator = Paginator(customers, 2)
-        page_number = request.GET.get("page")
-        page_obj = paginator.get_page(page_number)
+        # paginator = Paginator(customers, 2)
+        # page_number = request.GET.get("page")
+        # page_obj = paginator.get_page(page_number)
         search = request.GET.get('q')
         order = request.GET.get('order', 'recent')
         if search:
-            customer = Customer.objects.filter(Q(full_name__icontains=search)) | Q(email__icontains=search)
+            customers = Customer.objects.filter(Q(full_name__icontains=search)) | Q(email__icontains=search)
         if order == 'recent':
             customer = Customer.objects.all().order_by('-joined')
         else:
             customer = Customer.objects.all()
         context = {
             'customers': customer,
-            'customer_page': page_obj,
+            'custom':customers
+            # 'customer_page': page_obj,
         }
         return render(request, 'customers/home.html', context)
 
@@ -150,3 +156,38 @@ class CustomerDeleteView(View):
         if customer:
             customer.delete()
             return redirect('customer_list')
+
+
+
+def export_data(request):
+    date = datetime.datetime.now().strftime("%Y-%m-%d")
+    format = request.GET.get('format')
+    if format == 'csv':
+        meta = Customer._meta
+        field_names = [field.name for field in meta.fields]
+        response = HttpResponse(content_type='text/csv')
+
+        response['Content-Disposition'] = f'attachment; filename={Customer._meta.object_name}-{date}.csv'
+        writer = csv.writer(response)
+        writer.writerow(field_names)
+        for obj in Customer.objects.all():
+            writer.writerow([getattr(obj, field) for field in field_names])
+
+
+    elif format == 'json':
+        response = HttpResponse(content_type='application/json')
+        data = list(Customer.objects.all().values('id','full_name','phone','email'))
+        response.write(json.dumps(data, indent=4))
+        response['Content-Disposition'] = f'attachment; filename={Customer._meta.object_name}-{date}.json'
+
+
+
+
+    elif format == 'xlsx':
+        pass
+
+    else:
+        response = HttpResponse(status=404)
+        response.content = 'Bad Request'
+
+    return response

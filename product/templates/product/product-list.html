@@ -567,17 +567,15 @@
                                                         href="#!"><span class="far fa-heart"></span><span
                                                         class="ms-2 d-none d-md-inline-block">Favourite</span></a><a
                                                         class="btn btn-sm btn-primary d-lg-block mt-lg-2"
-                                                        href="#!"><span class="fas fa-cart-plus"> </span><span
+                                                        href="{% url 'product_detail' product.id %}"><span class="fas fa-cart-plus"> </span><span
                                                         class="ms-2 d-none d-md-inline-block">Add to Cart</span></a>
                                                 </div>
                                                 <br>
-                                                <button type="submit" href="{% url 'product_update' product.id %}"
-                                                        class="btn btn-secondary">Edit
-                                                </button>
-                                                <br>
-                                                <button type="submit" href="{% url 'product_delete' product.id %}"
-                                                        class="btn btn-danger">Delete
-                                                </button>
+                                                <div class="bg-red py-2"><a class="dropdown-item"
+                                                                              href="{% url 'product_update' product.id %}">Edit</a><a
+                                                        class="dropdown-item text-danger"
+                                                        href="{% url 'product_delete' product.id %}">Delete</a></div>
+                                            </div>
 
 
                                             </div>

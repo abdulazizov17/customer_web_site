@@ -17,9 +17,12 @@
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href={% static 'customers/assets/img/favicons/apple-touch-icon.png"' %}>
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'customers/assets/img/favicons/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'customers/assets/img/favicons/favicon-16x16.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180"
+          href={% static 'customers/assets/img/favicons/apple-touch-icon.png"' %}>
+    <link rel="icon" type="image/png" sizes="32x32"
+          href="{% static 'customers/assets/img/favicons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16"
+          href="{% static 'customers/assets/img/favicons/favicon-16x16.png' %}">
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'customers/assets/img/favicons/favicon.ico' %}">
     <link rel="manifest" href="{% static 'customers/assets/img/favicons/manifest.json' %}">
     <meta name="msapplication-TileImage" content="{% static 'customers/assets/img/favicons/mstile-150x150.png' %}">
@@ -85,7 +88,8 @@
                     {% if messages %}
                         <ul class="messages">
                             {% for message in messages %}
-                                <li style="color: red" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                <li style="color: red" {% if message.tags %}
+                                    class="{{ message.tags }}"{% endif %}>{{ message }}</li>
                             {% endfor %}
                         </ul>
                     {% endif %}
@@ -109,7 +113,8 @@
                                     {% csrf_token %}
                                     <div class="mb-3">
                                         <label class="form-label" for="split-login-email">Email</label>
-                                        <input class="form-control" id="split-login-email" type="email" name="email" required/>
+                                        <input class="form-control" id="split-login-email" type="email" name="email"
+                                               required/>
                                     </div>
                                     <div class="mb-3">
                                         <div class="d-flex justify-content-between">
@@ -140,12 +145,16 @@
                                 </div>
                                 <div class="row g-2 mt-2">
                                     <div class="col-sm-6"><a class="btn btn-outline-google-plus btn-sm d-block w-100"
-                                                             href="{% url 'social:begin' 'google-oauth2' %}"><span class="fab fa-google-plus-g me-2"
-                                                                            data-fa-transform="grow-8"></span>
-                                        googlee</a></div>
+                                                             href="{% url 'social:begin' 'google-oauth2' %}"><span
+                                            class="fab fa-google-plus-g me-2"
+                                            data-fa-transform="grow-8"></span>google</a></div>
                                     <div class="col-sm-6"><a class="btn btn-outline-facebook btn-sm d-block w-100"
                                                              href="#"><span class="fab fa-facebook-square me-2"
-                                                                            data-fa-transform="grow-8"></span> facebook</a>
+                                                                            data-fa-transform="grow-8"></span> Facebook</a>
+                                    </div>
+                                    <div class="col-sm-6"><a class="btn btn-outline-facebook btn-sm d-block w-100"
+                                                             href="#"><span class="fab fa-facebook-square me-2"
+                                                                            data-fa-transform="grow-8"></span> Twitter</a>
                                     </div>
                                 </div>
                             </div>
@@ -154,7 +163,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </main>
 <!-- ===============================================-->
 <!--    End of Main Content-->
@@ -227,7 +235,8 @@
             </div>
         </div>
         <hr/>
-        <div class="d-flex align-items-start"><img class="me-2" src="{% static 'customers/assets/img/icons/paragraph.svg' %}"
+        <div class="d-flex align-items-start"><img class="me-2"
+                                                   src="{% static 'customers/assets/img/icons/paragraph.svg' %}"
                                                    width="20" alt=""/>
             <div class="flex-1">
                 <h5 class="fs-0 d-flex align-items-center">Navigation Position </h5>
@@ -266,14 +275,16 @@
                     <input class="btn-check" id="navbar-style-transparent" type="radio" name="navbarStyle"
                            value="transparent" data-theme-control="navbarStyle"/>
                     <label class="btn d-block w-100 btn-navbar-style fs--1" for="navbar-style-transparent"> <img
-                            class="img-fluid img-prototype" src="{% static 'customers/assets/img/generic/default.png' %}"
+                            class="img-fluid img-prototype"
+                            src="{% static 'customers/assets/img/generic/default.png' %}"
                             alt=""/><span class="label-text"> Transparent</span></label>
                 </div>
                 <div class="col-6">
                     <input class="btn-check" id="navbar-style-inverted" type="radio" name="navbarStyle" value="inverted"
                            data-theme-control="navbarStyle"/>
                     <label class="btn d-block w-100 btn-navbar-style fs--1" for="navbar-style-inverted"> <img
-                            class="img-fluid img-prototype" src="{% static 'customers/assets/img/generic/inverted.png' %}"
+                            class="img-fluid img-prototype"
+                            src="{% static 'customers/assets/img/generic/inverted.png' %}"
                             alt=""/><span class="label-text"> Inverted</span></label>
                 </div>
                 <div class="col-6">
@@ -287,13 +298,15 @@
                     <input class="btn-check" id="navbar-style-vibrant" type="radio" name="navbarStyle" value="vibrant"
                            data-theme-control="navbarStyle"/>
                     <label class="btn d-block w-100 btn-navbar-style fs--1" for="navbar-style-vibrant"> <img
-                            class="img-fluid img-prototype" src="{% static 'customers/assets/img/generic/vibrant.png' %}"
+                            class="img-fluid img-prototype"
+                            src="{% static 'customers/assets/img/generic/vibrant.png' %}"
                             alt=""/><span class="label-text"> Vibrant</span></label>
                 </div>
             </div>
         </div>
         <div class="text-center mt-5"><img class="mb-4"
-                                           src="{% static 'customers/assets/img/icons/spot-illustrations/47.png' %}" alt=""
+                                           src="{% static 'customers/assets/img/icons/spot-illustrations/47.png' %}"
+                                           alt=""
                                            width="120"/>
             <h5>Like What You See?</h5>
             <p class="fs--1">Get Falcon now and create beautiful dashboards with hundreds of widgets.</p><a

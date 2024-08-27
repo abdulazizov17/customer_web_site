@@ -21,7 +21,7 @@ from .jazzmin import JAZZMIN_SETTINGS
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 env = environ.Env(
-    DEBUG=(bool, False)
+    DEBUG=(bool, True)
 )
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
@@ -104,10 +104,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ecommerce',
+        'NAME': env('NAME'),
         'PASSWORD': '123',
         'HOST': 'localhost',
-        'PORT': 5432,
+        'PORT': '5432',
         'USER': 'ecommerce',
     }
 }
@@ -135,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 
@@ -143,12 +143,18 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+STATIC_ROOT = ''
 
-STATIC_URL = 'static/'
-STATIC_ROOT = [os.path.join(BASE_DIR, 'staticfiles')]
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = ('staticfiles',)
 
 MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = [os.path.join(BASE_DIR, 'media')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -165,7 +171,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'abdulazizovasilbek872@gmail.com'
+EMAIL_HOST_USER = 'jm1495046@gmail.com'
 EMAIL_HOST_PASSWORD = 'icyr klts basq srid'
 
 AUTHENTICATION_BACKENDS = [
@@ -173,7 +179,7 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
 ]
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =env('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET =env('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '890888201275-hn1f51mmbk5p5t6li85clpe7md4evm9l.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Sa7rLwvHWlmQqVpmFg9BSHZW9E0Z'
 
-LOGIN_REDIRECT_URL = 'ecommerce'
+LOGIN_REDIRECT_URL = 'customer_exam'

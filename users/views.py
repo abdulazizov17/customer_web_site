@@ -45,3 +45,5 @@ def logout_page(request):
     if request.method == 'POST':
         logout(request)
         return redirect('customer_list')
+
+
