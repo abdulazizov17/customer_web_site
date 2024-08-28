@@ -8,7 +8,7 @@ import csv
 import datetime
 import json
 from django.http import HttpResponse
-
+import openpyxl
 
 # def customer_list(request):
 #     customers = Customer.objects.all()
@@ -183,8 +183,33 @@ def export_data(request):
 
 
 
+
     elif format == 'xlsx':
-        pass
+
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+
+        response['Content-Disposition'] = f'attachment; filename={Customer._meta.object_name}-{date}.xlsx'
+
+        workbook = openpyxl.Workbook()
+        worksheet = workbook.active
+
+        worksheet.title = 'Customers'
+
+        # Define the header row
+
+        meta = Customer._meta
+
+        field_names = [field.name for field in meta.fields]
+
+        worksheet.append(field_names)
+
+        # Populate the worksheet with data
+
+        for obj in Customer.objects.all():
+            worksheet.append([getattr(obj, field) for field in field_names])
+
+        workbook.save(response)
+
 
     else:
         response = HttpResponse(status=404)
