@@ -159,60 +159,58 @@ class CustomerDeleteView(View):
 
 
 
-def export_data(request):
-    date = datetime.datetime.now().strftime("%Y-%m-%d")
-    format = request.GET.get('format')
-    if format == 'csv':
+
+
+class ExportDataView(View):
+    def get(self, request, *args, **kwargs):
+        date = datetime.datetime.now().strftime("%Y-%m-%d")
+        format = request.GET.get('format')
+
+        if format == 'csv':
+            return self.export_csv(date)
+        elif format == 'json':
+            return self.export_json(date)
+        elif format == 'xlsx':
+            return self.export_excel(date)
+        else:
+            return HttpResponse("Format not supported", status=400)
+
+    def export_csv(self, date):
         meta = Customer._meta
         field_names = [field.name for field in meta.fields]
         response = HttpResponse(content_type='text/csv')
-
         response['Content-Disposition'] = f'attachment; filename={Customer._meta.object_name}-{date}.csv'
+
         writer = csv.writer(response)
         writer.writerow(field_names)
         for obj in Customer.objects.all():
             writer.writerow([getattr(obj, field) for field in field_names])
 
+        return response
 
-    elif format == 'json':
+    def export_json(self, date):
         response = HttpResponse(content_type='application/json')
-        data = list(Customer.objects.all().values('id','full_name','phone','email'))
+        data = list(Customer.objects.all().values('id', 'full_name', 'phone', 'email'))
         response.write(json.dumps(data, indent=4))
         response['Content-Disposition'] = f'attachment; filename={Customer._meta.object_name}-{date}.json'
 
+        return response
 
-
-
-
-    elif format == 'xlsx':
-
+    def export_excel(self, date):
         response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-
         response['Content-Disposition'] = f'attachment; filename={Customer._meta.object_name}-{date}.xlsx'
 
         workbook = openpyxl.Workbook()
         worksheet = workbook.active
-
         worksheet.title = 'Customers'
 
         # Define the header row
-
         meta = Customer._meta
-
         field_names = [field.name for field in meta.fields]
-
         worksheet.append(field_names)
 
         # Populate the worksheet with data
-
         for obj in Customer.objects.all():
             worksheet.append([getattr(obj, field) for field in field_names])
-
         workbook.save(response)
-
-
-    else:
-        response = HttpResponse(status=404)
-        response.content = 'Bad Request'
-
-    return response
+        return response
