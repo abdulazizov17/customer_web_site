@@ -161,56 +161,52 @@ class CustomerDeleteView(View):
 
 
 
-class ExportDataView(View):
-    def get(self, request, *args, **kwargs):
+
+class ExportData(View):
+    def get(self, request):
         date = datetime.datetime.now().strftime("%Y-%m-%d")
         format = request.GET.get('format')
-
         if format == 'csv':
-            return self.export_csv(date)
+            meta = Customer._meta
+            field_names = [field.name for field in meta.fields]
+            response = HttpResponse(content_type='text/csv')
+
+            response['Content-Disposition'] = f'attachment; filename={Customer._meta.object_name}-{date}.csv'
+            writer = csv.writer(response)
+            writer.writerow(field_names)
+            for obj in Customer.objects.all():
+                writer.writerow([getattr(obj, field) for field in field_names])
+
+
         elif format == 'json':
-            return self.export_json(date)
+            response = HttpResponse(content_type='application/json')
+            data = list(Customer.objects.all())
+            response.write(json.dumps(data, indent=4, default=str))
+            response['Content-Disposition'] = f'attachment; filename={Customer._meta.object_name}-{date}.json'
+
+
+
+
         elif format == 'xlsx':
-            return self.export_excel(date)
+            response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+            response['Content-Disposition'] = f'attachment; filename="{Customer._meta.object_name}-{date}.xlsx"'
+            workbook = openpyxl.Workbook()
+            worksheet = workbook.active
+            worksheet.title = 'Customers'
+            header = ['ID', 'Full Name', 'Email', 'Addres', 'Slug', 'Phone Number']
+
+            worksheet.append(header)
+            customers = Customer.objects.all()
+            for obj in customers:
+                worksheet.append([obj.id, obj.full_name, obj.email, obj.address, obj.slug, obj.phone])
+
+            workbook.save(response)
+            return response
+
+        # header
+
         else:
-            return HttpResponse("Format not supported", status=400)
+            response = HttpResponse(status=404)
+            response.content = 'Bad Request'
 
-    def export_csv(self, date):
-        meta = Customer._meta
-        field_names = [field.name for field in meta.fields]
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = f'attachment; filename={Customer._meta.object_name}-{date}.csv'
-
-        writer = csv.writer(response)
-        writer.writerow(field_names)
-        for obj in Customer.objects.all():
-            writer.writerow([getattr(obj, field) for field in field_names])
-
-        return response
-
-    def export_json(self, date):
-        response = HttpResponse(content_type='application/json')
-        data = list(Customer.objects.all().values('id', 'full_name', 'phone', 'email'))
-        response.write(json.dumps(data, indent=4))
-        response['Content-Disposition'] = f'attachment; filename={Customer._meta.object_name}-{date}.json'
-
-        return response
-
-    def export_excel(self, date):
-        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-        response['Content-Disposition'] = f'attachment; filename={Customer._meta.object_name}-{date}.xlsx'
-
-        workbook = openpyxl.Workbook()
-        worksheet = workbook.active
-        worksheet.title = 'Customers'
-
-        # Define the header row
-        meta = Customer._meta
-        field_names = [field.name for field in meta.fields]
-        worksheet.append(field_names)
-
-        # Populate the worksheet with data
-        for obj in Customer.objects.all():
-            worksheet.append([getattr(obj, field) for field in field_names])
-        workbook.save(response)
         return response

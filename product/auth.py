@@ -9,7 +9,13 @@ from django.views.generic import FormView
 from product.authentication_form import AuthenticationForm
 from product.forms import SendingEmailForm
 from customers.forms import LoginForm,RegisterForm
-from customers.templates.customers import registrat
+from django.http import HttpResponse
+
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from product.tokens import account_activation_token
+
+from users.models import User
 
 # def login_page(request):
 #     if request.method == 'POST':
@@ -73,8 +79,9 @@ class RegisterPage(FormView):
         send_mail(
             'User Succesfully Registered',
             'Test body',
-            [user.email],
-            fail_silently=False )
+            ['abdulazizov@gmail.com','asilbek@gmail.com'],
+            fail_silently=False
+        )
         login(self.request, user,backend='django.contrib.auth.backends.ModelBackend')
         return super().form_valid(form)
 
@@ -121,3 +128,18 @@ class SendingEmail(View):
             }
             return render(request, 'product/send-email.html', context)
 
+class ActivateAccountView(View):
+    def get(self, request, uidb64, token, *args, **kwargs):
+        try:
+            uid = force_bytes(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            user = None
+
+        if user and account_activation_token.check_token(user, token):
+            user.is_active = True
+            user.save()
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            return HttpResponse('Thank you for your email confirmation. Now you can login to your account.')
+        else:
+            return HttpResponse('Activation link is invalid!')

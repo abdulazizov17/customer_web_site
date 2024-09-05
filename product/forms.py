@@ -60,3 +60,4 @@ class SendingEmailForm(forms.Form):
     recipient = forms.EmailField(required=True)
 
 
+
