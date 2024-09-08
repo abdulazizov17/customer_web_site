@@ -66,7 +66,7 @@ msgstr "Vorlage: <q>%(name)s</q>"
 #. Translators: Search is not a verb here, it qualifies path (a search path)
 #: templates/admin_doc/template_detail.html:17
 #, python-format
-msgid "Search path for template <q>%(name)s</q>:"
+msgid "Search path for templates <q>%(name)s</q>:"
 msgstr "Suchpfad für Vorlage <q>%(name)s</q>:"
 
 #: templates/admin_doc/template_filter_index.html:37

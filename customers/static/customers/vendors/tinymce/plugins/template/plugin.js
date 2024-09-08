@@ -89,7 +89,7 @@
       return editor.getParam('template_replace_values');
     };
     var getTemplates = function (editor) {
-      return editor.getParam('templates');
+      return editor.getParam('template');
     };
     var getCdateFormat = function (editor) {
       return editor.getParam('template_cdate_format', editor.translate('%Y-%m-%d'));
@@ -411,7 +411,7 @@
         });
       };
       var loadFailedAlert = function (api) {
-        editor.windowManager.alert('Could not load the specified template.', function () {
+        editor.windowManager.alert('Could not load the specified templates.', function () {
           return api.focus('template');
         });
       };
@@ -568,12 +568,12 @@
       };
       editor.ui.registry.addButton('template', {
         icon: 'template',
-        tooltip: 'Insert template',
+        tooltip: 'Insert templates',
         onAction: onAction
       });
       editor.ui.registry.addMenuItem('template', {
         icon: 'template',
-        text: 'Insert template...',
+        text: 'Insert templates...',
         onAction: onAction
       });
     };

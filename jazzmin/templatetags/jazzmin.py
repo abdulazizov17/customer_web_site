@@ -379,8 +379,8 @@ def as_json(value: Union[List, Dict]) -> str:
 @register.simple_tag
 def get_changeform_template(adminform: AdminForm) -> str:
     """
-    Go get the correct change form template based on the modeladmin being used,
-    the default template, or the overridden one for this modeladmin
+    Go get the correct change form templates based on the modeladmin being used,
+    the default templates, or the overridden one for this modeladmin
     """
     options = get_settings()
     has_fieldsets = has_fieldsets_check(adminform)

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>App</title>
+</head>
+<body>
+{% for author in authors %}
+    <li>
+        <strong>Muallif:</strong> {{ author.name }} <br>
+        <strong>Eng qimmat kitob narxi:</strong> {{ author.most_popular_book }} <br>
+        <strong>Eng arzon kitob narxi:</strong> {{ author.least_expensive_book }} <br>
+        <strong>O'rtacha kitob narxi:</strong> {{ author.average_book_price }} <br>
+    </li>{% endfor %}
+{##}
+{#{% for book in books %}#}
+{#    <h1>Max Price Books => {{ book.min_price }}</h1>#}
+{#{% endfor %}#}
+
+</body>
+</html>
