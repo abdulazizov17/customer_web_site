@@ -32,4 +32,15 @@ def magic(request):
         least_expensive_book=Subquery(least_expensive_book),
         average_book_price=Subquery(average_price)
     )
+
+#aggregate orqali bunisi
+    # #book_stats = Book.objects.aggregate(
+    #     most_expensive_book=Max('price'),
+    #     least_expensive_book=Min('price'),
+    #     average_book_price=Avg('price')
+    # )
+
+    # return render(request, 'app/index.html', {
+    #     'book_stats': book_stats,
+    # })
     return render(request,'app/index.html',{'authors':authors})
