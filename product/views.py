@@ -13,7 +13,7 @@ class ProductListView(ListView):
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'product/product-details.html'
-    context_object_name = 'product'
+    context_object_name = 'product_data'
 
     def get_object(self):
         product_id = self.kwargs.get("product_id")

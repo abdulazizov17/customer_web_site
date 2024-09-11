@@ -7927,7 +7927,7 @@ var locationBySessionInit = function locationBySessionInit() {
 
 
 var marketShareEcommerceInit = function marketShareEcommerceInit() {
-  var ECHART_PRODUCT_SHARE = '.echart-product-share';
+  var ECHART_PRODUCT_SHARE = '.echart-product_data-share';
   var $echartProductShare = document.querySelector(ECHART_PRODUCT_SHARE);
 
   if ($echartProductShare) {

@@ -9,7 +9,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('product', '0001_initial'),
+        ('product_data', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.AlterModelOptions(
-            name='product',
+            name='product_data',
             options={'verbose_name_plural': 'Products'},
         ),
         migrations.AddField(
@@ -54,33 +54,33 @@ class Migration(migrations.Migration):
             field=models.DateTimeField(auto_now=True),
         ),
         migrations.AddField(
-            model_name='product',
+            model_name='product_data',
             name='created_at',
             field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='product',
+            model_name='product_data',
             name='discount',
             field=models.IntegerField(blank=True, default=0, null=True),
         ),
         migrations.AddField(
-            model_name='product',
+            model_name='product_data',
             name='quantity',
             field=models.PositiveIntegerField(blank=True, default=0, null=True),
         ),
         migrations.AddField(
-            model_name='product',
+            model_name='product_data',
             name='updated_at',
             field=models.DateTimeField(auto_now=True),
         ),
         migrations.AlterField(
-            model_name='product',
+            model_name='product_data',
             name='description',
             field=models.TextField(blank=True, null=True),
         ),
         migrations.AlterField(
-            model_name='product',
+            model_name='product_data',
             name='price',
             field=models.FloatField(blank=True, null=True),
         ),
@@ -89,8 +89,8 @@ class Migration(migrations.Migration):
             table='category',
         ),
         migrations.AlterModelTable(
-            name='product',
-            table='product',
+            name='product_data',
+            table='product_data',
         ),
         migrations.CreateModel(
             name='Comment',
@@ -100,7 +100,7 @@ class Migration(migrations.Migration):
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('message', models.TextField(blank=True, null=True)),
                 ('file', models.FileField(blank=True, null=True, upload_to='comments/')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='product.product')),
+                ('product_data', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='product_data.product_data')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to=settings.AUTH_USER_MODEL)),
             ],
             options={
@@ -115,7 +115,7 @@ class Migration(migrations.Migration):
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('image', models.ImageField(blank=True, null=True, upload_to='products/')),
                 ('is_primary', models.BooleanField(default=False)),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='product.product')),
+                ('product_data', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='product_data.product_data')),
             ],
             options={
                 'db_table': 'image',
@@ -127,9 +127,9 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
-                ('attribute', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.attribute')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.product')),
-                ('value', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.attributevalue')),
+                ('attribute', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product_data.attribute')),
+                ('product_data', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product_data.product_data')),
+                ('value', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product_data.attributevalue')),
             ],
             options={
                 'abstract': False,

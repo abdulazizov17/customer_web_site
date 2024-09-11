@@ -31,7 +31,7 @@ from users.models import User
 #                 messages.error(request, 'Invalid username or password')
 #     else:
 #         form = LoginForm()
-#     return render(request,'product/registrat/login.html',{'form':form})
+#     return render(request,'product_data/registrat/login.html',{'form':form})
 
 
 class LoginPage(LoginView):
@@ -65,7 +65,7 @@ class LoginPage(LoginView):
 #     else:
 #         form = RegisterForm()
 #
-#     return render(request, 'product/registrat/register.html',{'form':form})
+#     return render(request, 'product_data/registrat/register.html',{'form':form})
 
 
 class RegisterPage(FormView):

@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=50)),
                 ('description', models.TextField()),
                 ('price', models.IntegerField()),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.category')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product_data.category')),
             ],
         ),
     ]

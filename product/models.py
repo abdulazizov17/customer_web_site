@@ -42,7 +42,7 @@ class Product(BaseModel):
         return False
 
     class Meta:
-        db_table = 'product'
+        db_table = 'product_data'
         verbose_name_plural = 'Products'
 
 
